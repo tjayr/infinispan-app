@@ -26,7 +26,7 @@ The first call to either node should succeed - data being added to the cache wil
 
 `curl http://localhost:9001/modules`
 
-The bug manifests as an exception when making a subsequent call to either node which causes the data to be unmarshalled: `curl http://localhost:900[1|2]/modules`   
+The bug manifests as an exception when unmarshalling the data on a read from the cache. This can be triggered by making a subsequent call to either node. `curl http://localhost:9002/modules`   
 
 ```shell
 Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.infinispan.commons.dataconversion.EncodingException: ISPN000495: ProtostreamTranscoder encountered error transcoding content] with root cause
