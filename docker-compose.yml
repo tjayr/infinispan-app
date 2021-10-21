@@ -1,0 +1,41 @@
+version: '3.8'
+
+networks:
+  mynet:
+
+services:
+  gossip:
+    image: jboss/jgroups-gossip
+    ports:
+      - "12001:12001"
+    networks:
+      mynet:
+
+  node1:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: infinispan-cluster-app
+    ports:
+      - "9001:9000"
+    environment:
+      JAVA_OPTS: "-Xmx300m -Dinfinispan.node.name=node1 -Dinfinispan.cluster.name=modules -Djgroups.tunnel.gossip_router_hosts=gossip[12001]"
+    networks:
+      mynet:
+    depends_on:
+      - gossip
+
+  node2:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: infinispan-cluster-app
+    environment:
+      JAVA_OPTS: "-Xmx300m -Dinfinispan.node.name=node2 -Dinfinispan.cluster.name=modules -Djgroups.tunnel.gossip_router_hosts=gossip[12001]"
+    ports:
+      - "9002:9000"
+    networks:
+      mynet:
+    depends_on:
+      - gossip
+

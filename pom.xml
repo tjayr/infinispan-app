@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.11</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.github.tjayr</groupId>
+	<artifactId>infinispan-cluster-app</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>infinispan-cluster-app</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>11</java.version>
+<!--		<version.infinispan>12.1.7.Final</version.infinispan>-->
+
+		<version.infinispan>13.0.0.Final</version.infinispan>
+<!--		<version.infinispan>11.0.11.Final</version.infinispan>-->
+		<version.spring.boot>2.4.11</version.spring.boot>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.infinispan</groupId>
+				<artifactId>infinispan-bom</artifactId>
+				<version>${version.infinispan}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-parent</artifactId>
+				<version>${version.spring.boot}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.infinispan</groupId>
+			<artifactId>infinispan-spring5-embedded</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.infinispan.protostream</groupId>
+			<artifactId>protostream-processor</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+
+		</plugins>
+	</build>
+
+
+		<repositories>
+			<repository>
+				<id>central</id>
+				<name>central</name>
+				<url>https://repo1.maven.org/maven2/</url>
+			</repository>
+			<repository>
+				<id>nexus</id>
+				<name>Guru Nexus Repository</name>
+				<url>https://repo.gurudevelopments.com/repository/guru-releases/</url>
+				<layout>default</layout>
+				<releases>
+					<enabled>true</enabled>
+					<updatePolicy>always</updatePolicy>
+					<checksumPolicy>warn</checksumPolicy>
+				</releases>
+				<snapshots>
+					<enabled>false</enabled>
+					<updatePolicy>never</updatePolicy>
+					<checksumPolicy>fail</checksumPolicy>
+				</snapshots>
+			</repository>
+	</repositories>
+
+</project>

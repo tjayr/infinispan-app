@@ -1,0 +1,34 @@
+
+<infinispan>
+
+    <jgroups>
+        <stack name="my-stack" extends="tcp">
+            <TCPGOSSIP initial_hosts="${jgroups.tunnel.gossip_router_hosts:localhost[12001]}"  stack.combine="REPLACE" stack.position="MPING" />
+        </stack>
+    </jgroups>
+
+    <cache-container name="default" statistics="true">
+        <metrics gauges="true" histograms="true" />
+        <jmx enabled="true" />
+
+        <transport cluster="${infinispan.cluster.name}" stack="my-stack" node-name="${infinispan.node.name:}"/>
+
+<!--        <invalidation-cache name="modules" statistics="true">-->
+<!--            <encoding>-->
+<!--                <key media-type="application/x-protostream" />-->
+<!--                <value media-type="application/x-protostream"/>-->
+<!--            </encoding>-->
+<!--            <memory max-size="50MB" when-full="REMOVE"/>-->
+<!--        </invalidation-cache>-->
+
+        <replicated-cache name="modules" statistics="true">
+            <encoding>
+                <key media-type="application/x-protostream" />
+                <value media-type="application/x-protostream"/>
+            </encoding>
+            <memory max-size="50MB" when-full="REMOVE"/>
+        </replicated-cache>
+
+    </cache-container>
+
+</infinispan>
